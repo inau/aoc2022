@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <functional>
 #include "../io/reader.h"
 
 namespace AoC22 { namespace Days {
@@ -41,6 +42,6 @@ namespace AoC22 { namespace Days {
 		std::shared_ptr<DayResult> runSecond(bool exampleInput);
 	};
 
-
+	void IterateData(std::ifstream& data, std::function<void(const std::string&)> LineFunc);
 
 }}

@@ -27,4 +27,14 @@ std::shared_ptr<DayResult> Day::runSecond(bool exampleInput)
 		.getStream());
 }
 
+void IterateData(std::ifstream& data, std::function<void(const std::string&)> LineFunc)
+{
+	std::string line;
+	while (std::getline(data, line) && LineFunc)
+	{
+		LineFunc(line);
+	}
+}
+
+
 }}
