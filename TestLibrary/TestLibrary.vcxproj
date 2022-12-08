@@ -177,6 +177,7 @@
     <ClCompile Include="TestDay05.cpp" />
     <ClCompile Include="TestDay06.cpp" />
     <ClCompile Include="TestDay07.cpp" />
+    <ClCompile Include="TestDay08.cpp" />
   </ItemGroup>
   <ItemGroup>
     <_CustomResource Include="$(SolutionDir)\InputData\**">

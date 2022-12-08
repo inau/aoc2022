@@ -59,13 +59,8 @@ bool parse_fileinfo(const std::string& line, FileInfo& fi)
 	return parse_fileinfo(line, fi.isDirectory, fi.name, fi.size);
 }
 
-std::shared_ptr<DayResult> AoC22::Days::Day07::_runFirst(std::ifstream& data)
+void Build_file_tree(Hierarchy::Directory* root, std::ifstream& data)
 {
-	unsigned lineCount = 0;
-
-	Hierarchy h;
-	
-	Hierarchy::Directory* root = dynamic_cast<Hierarchy::Directory*>(h.GetRoot());
 	Hierarchy::Directory* node = nullptr;
 	Cmd cmd;
 	FileInfo file;
@@ -98,24 +93,47 @@ std::shared_ptr<DayResult> AoC22::Days::Day07::_runFirst(std::ifstream& data)
 	};
 
 	IterateData(data, func);
+}
+
+std::shared_ptr<DayResult> AoC22::Days::Day07::_runFirst(std::ifstream& data)
+{
+	unsigned lineCount = 0;
+
+	Hierarchy h;
+	
+	Hierarchy::Directory* root = dynamic_cast<Hierarchy::Directory*>(h.GetRoot());
+
+	Build_file_tree(root, data);
 
 	unsigned long sum = 0u;
 	unsigned long threshold = 100000;
 
 	/// Process file graph
 	auto dirs = root->GetDirectories();
+
+	std::priority_queue<Hierarchy::Directory*> process;
 	for (auto& dir : dirs)
 	{
+		process.push(dir);
+	}
+
+	while( !process.empty() )
+	{
+		Hierarchy::Directory* dir = process.top();
+		process.pop();
+
 		auto sz = dir->GetSize();
-		if (sz > threshold)
+
+		auto subdirs = dir->GetDirectories();
+		for (auto sdir : subdirs)
 		{
-			auto subdirs = dir->GetDirectories();
-			for (auto sdir : subdirs)
-			{
-				dirs.push_back(sdir);
-			}
+			process.push(sdir);
 		}
-		else sum += sz;
+
+		if (sz < threshold)
+		{
+			sum += sz;
+		}
 	}
 
 	return std::make_shared<DayIntegerResult>(sum);
@@ -125,19 +143,57 @@ std::shared_ptr<DayResult> AoC22::Days::Day07::_runFirst(std::ifstream& data)
 
 std::shared_ptr<DayResult> AoC22::Days::Day07::_runSecond(std::ifstream& data)
 {
-	unsigned cc = 14;
+	Hierarchy h;
+	Hierarchy::Directory* root = dynamic_cast<Hierarchy::Directory*>(h.GetRoot());
 
-	std::vector<int> _index;
-	auto func = [&cc, &_index](const std::string& line)
+	Build_file_tree(root, data);
+
+	unsigned long total_disk_size = 70000000;
+	unsigned long required_space = 30000000;
+
+	unsigned long space_to_free = required_space -(total_disk_size - root->GetSize());
+
+	/// Process file graph
+	auto dirs = root->GetDirectories();
+
+	struct DirCmp : public std::less<Hierarchy::Directory*>
 	{
+		constexpr bool operator()(const Hierarchy::Directory*& _Left, const Hierarchy::Directory*& _Right) const {
+			return _Left && _Right && _Left->GetSize() < _Right->GetSize();
+		}
+	} compareDir;
 
-	};
+	std::priority_queue<Hierarchy::Directory*> process(compareDir);
+	for (auto& dir : dirs)
+	{
+		process.push(dir);
+	}
 
-	IterateData(data, func);
+	Hierarchy::Directory* node = nullptr;
+	while (!process.empty())
+	{
+		Hierarchy::Directory* dir = process.top();
+		process.pop();
 
-	/// Process command queue
+		auto sz = dir->GetSize();
 
-	return std::make_shared<DayIntegerResult>(_index[0]);
+		auto subdirs = dir->GetDirectories();
+		for (auto sdir : subdirs)
+		{
+			process.push(sdir);
+		}
+
+		if (sz >= space_to_free)
+		{
+			if (!node || node->GetSize() > sz)
+			{
+				node = dir;
+			}
+
+		}
+	}
+
+	return std::make_shared<DayIntegerResult>(node ? node->GetSize()  : 0);
 }
 
 // ------------ DATA
@@ -188,7 +244,7 @@ std::vector<Hierarchy::Directory*> Hierarchy::Directory::GetDirectories()
 	return directories;
 }
 
-unsigned long Hierarchy::Directory::GetSize()
+unsigned long Hierarchy::Directory::GetSize() const
 {
 	unsigned long sz = 0u;
 	for (auto& node : m_Children)
@@ -210,7 +266,7 @@ Hierarchy::Node* Hierarchy::GetRoot()
 }
 
 }
-unsigned long Days::Hierarchy::File::GetSize()
+unsigned long Days::Hierarchy::File::GetSize() const
 {
 	return m_Size;
 }

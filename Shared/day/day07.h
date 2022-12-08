@@ -31,7 +31,7 @@ namespace AoC22 { namespace Days {
 				, m_name(name) {}
 
 			Node* GoToParent();
-			virtual unsigned long GetSize() = 0;
+			virtual unsigned long GetSize() const = 0;
 		};
 
 		class File : public Node
@@ -44,7 +44,7 @@ namespace AoC22 { namespace Days {
 				, m_Size(sz) {}
 
 			// Inherited via Node
-			virtual unsigned long GetSize() override;
+			virtual unsigned long GetSize() const override;
 		};
 
 		class Directory : public Node
@@ -62,7 +62,7 @@ namespace AoC22 { namespace Days {
 			Directory* GetDirectory(std::string name);
 			std::vector<Directory*> GetDirectories();
 			// Inherited via Node
-			virtual unsigned long GetSize() override;
+			virtual unsigned long GetSize() const override;
 		};
 	protected:
 		std::shared_ptr<Node> m_root;

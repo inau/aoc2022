@@ -42,6 +42,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)day\day07.cpp">
       <Filter>day</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)day\day08.cpp">
+      <Filter>day</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)io\dataInstance.h">
@@ -72,6 +75,9 @@
       <Filter>day</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)day\day07.h">
+      <Filter>day</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)day\day08.h">
       <Filter>day</Filter>
     </ClInclude>
   </ItemGroup>

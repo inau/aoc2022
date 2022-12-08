@@ -21,6 +21,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)day\day05.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)day\day06.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)day\day07.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)day\day08.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)day\dayShared.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)io\dataInstance.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)io\reader.cpp" />
@@ -33,6 +34,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)day\day05.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)day\day06.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)day\day07.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)day\day08.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)day\dayShared.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)io\dataInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)io\reader.h" />
