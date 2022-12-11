@@ -12,7 +12,7 @@ namespace AoC22 { namespace IO {
 	public:
 		InputDataReader(std::wstring dataRootPath);
 
-		DataInstance GetData(unsigned int _day, DataInstance::Type _type);
+		DataInstance GetData(unsigned int _day, DataInstance::Type _type, unsigned idx = 0u);
 	};
 
 

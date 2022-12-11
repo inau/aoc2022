@@ -39,7 +39,7 @@ namespace AoC22 { namespace Days {
 		Day(IO::InputDataReader& reader);
 
 		std::shared_ptr<DayResult> runFirst(bool exampleInput);
-		std::shared_ptr<DayResult> runSecond(bool exampleInput);
+		std::shared_ptr<DayResult> runSecond(bool exampleInput, unsigned auxindex = 0u);
 	};
 
 	void IterateData(std::ifstream& data, std::function<void(const std::string&)> LineFunc);

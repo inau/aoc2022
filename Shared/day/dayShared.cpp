@@ -17,13 +17,13 @@ std::shared_ptr<DayResult> Day::runFirst(bool exampleInput)
 		.getStream());
 }
 
-std::shared_ptr<DayResult> Day::runSecond(bool exampleInput)
+std::shared_ptr<DayResult> Day::runSecond(bool exampleInput, unsigned auxIdx)
 {
 	return _runSecond(m_input
 		.GetData(GetDay(), 
 			exampleInput 
 			? IO::DataInstance::Type::EXAMPLE
-			: IO::DataInstance::Type::INPUT)
+			: IO::DataInstance::Type::INPUT, auxIdx)
 		.getStream());
 }
 

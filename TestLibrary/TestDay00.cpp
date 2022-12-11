@@ -32,9 +32,9 @@ namespace TestLibrary
 
 			std::wstring path = Shared::InputDataRoot;
 
-			auto example = DataInstance::CreateDataInstance(path, 0, DataInstance::Type::EXAMPLE); // 2
+			auto example = DataInstance::CreateDataInstance(path, 0, DataInstance::Type::EXAMPLE, 0); // 2
 			StreamTester(example.getStream(), "example", L"example file failed");
-			auto first = DataInstance::CreateDataInstance(path, 0, DataInstance::Type::INPUT); // 10
+			auto first = DataInstance::CreateDataInstance(path, 0, DataInstance::Type::INPUT, 0); // 10
 			StreamTester(first.getStream(), "first", L"input file failed");
 
 		}

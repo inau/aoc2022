@@ -11,12 +11,15 @@ namespace AoC22 { namespace IO {
         }
         return str;
     }
-    DataInstance::DataInstance(std::wstring dataRootPath, unsigned int day, Type type)
+    DataInstance::DataInstance(std::wstring dataRootPath, unsigned int day, Type type, unsigned aux)
         : m_path(dataRootPath)
         , m_day(day)
         , m_type(type)
+        , m_aux(aux)
     {
-        std::wstring m_uri = m_path + L"day" + std::to_wstring(m_day) + L"/" + type_to_textual(m_type) + L".txt";
+        std::wstring number = (m_day < 10 ? L"0" : L"0") + std::to_wstring(m_day);
+        std::wstring auxNb = (m_aux != 0 ? std::to_wstring(aux) : L"");
+        std::wstring m_uri = m_path + L"day" + number + L"/" + type_to_textual(m_type) + auxNb + L".txt";
         m_file.open(m_uri);
     }
 
@@ -35,9 +38,9 @@ namespace AoC22 { namespace IO {
         return m_file;
     }
 
-    DataInstance DataInstance::CreateDataInstance(std::wstring dataRootPath, unsigned int day, Type type)
+    DataInstance DataInstance::CreateDataInstance(std::wstring dataRootPath, unsigned int day, Type type, unsigned aux = 0u)
     {
-        return DataInstance(dataRootPath, day, type);
+        return DataInstance(dataRootPath, day, type, aux);
     }
 
 }}

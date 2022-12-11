@@ -8,9 +8,9 @@ InputDataReader::InputDataReader(std::wstring dataRootPath)
 {
 }
 
-DataInstance InputDataReader::GetData(unsigned int _day, DataInstance::Type _type)
+DataInstance InputDataReader::GetData(unsigned int _day, DataInstance::Type _type, unsigned auxIdx)
 {
-	return DataInstance::CreateDataInstance(m_path, _day,_type);
+	return DataInstance::CreateDataInstance(m_path, _day,_type, auxIdx);
 }
 
 }}
