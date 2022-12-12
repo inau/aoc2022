@@ -17,7 +17,7 @@ namespace AoC22 { namespace IO {
         , m_type(type)
         , m_aux(aux)
     {
-        std::wstring number = (m_day < 10 ? L"0" : L"0") + std::to_wstring(m_day);
+        std::wstring number = (m_day < 10 ? L"0" : L"") + std::to_wstring(m_day);
         std::wstring auxNb = (m_aux != 0 ? std::to_wstring(aux) : L"");
         std::wstring m_uri = m_path + L"day" + number + L"/" + type_to_textual(m_type) + auxNb + L".txt";
         m_file.open(m_uri);

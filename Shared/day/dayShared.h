@@ -2,28 +2,10 @@
 #include <string>
 #include <functional>
 #include "../io/reader.h"
+#include "../day/dayresults.h"
 
 namespace AoC22 { namespace Days {
 
-	class DayResult
-	{
-	public:
-		virtual ~DayResult() {}
-	};
-
-	class DayIntegerResult : public DayResult
-	{
-	public:
-		DayIntegerResult(unsigned int _val) : Value(_val) {}
-		const unsigned int Value;
-	};
-
-	class DayStringResult : public DayResult
-	{
-	public:
-		DayStringResult(std::string _val) : Value(_val +"\n") {}
-		std::string Value;
-	};
 
 	class Day
 	{
